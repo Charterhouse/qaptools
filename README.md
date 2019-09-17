@@ -2,6 +2,8 @@ Implementation of the [Pinocchio](https://eprint.iacr.org/2013/279) zk-SNARK sys
 
 Used by the [original PySNARK](https://github.com/Charterhouse/pysnark) and the qaptools backend of [its re-write](https://github.com/meilof/pysnark).
 
+Qaptools may be used for non-commercial, experimental and research purposes; see `LICENSE.md` for details. Qaptools is experimental and **not fit for production environment**. In particular, qaptools does **not use cryptographically secure randomness**! See `base.cpp` and `modp.cpp`.
+
 Compile instructions:
 
 ```
