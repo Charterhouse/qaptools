@@ -30,7 +30,5 @@ POSSIBILITY OF SUCH DAMAGE.
 Some files in this package have their own copyright conditions. Please refer
 to the respective files for details:
 
-* everything under `qaptools/xbyak` is copyright by MITSUNARI Shigeo, see `qaptools/xbyak/COPYRIGHT`
-* everything under `qaptools/ate-pairing` is released under the BSD 3-Clause License, see `qaptools/ate-pairing/readme.md`  
-* `pysnark/contracts/Pairing.sol` is copyright by Christian Reitwiessner, see the file itself
-* `examples/DRBG.py` is copyright by David Lazar, see the file itself
+* `depends/xbyak` is copyright by MITSUNARI Shigeo, see its `COPYRIGHT` file
+* `depends/ate-pairing` is released under the BSD 3-Clause License, see its `readme.md` file
