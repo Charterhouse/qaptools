@@ -98,9 +98,9 @@ int main (int argc, char **argv) {
                 qapvks[vkfile] = readfromfile<qapvk>(vkfile, true);
             }
 
-            cerr << "Verifying " << name << " (" << vkfile << ")" << " ";
+            cerr << "Verifying " << name << " (" << vkfile << ")" << endl;
             prooff >> proofs[name];
-            cerr << qapver(qapvks[vkfile], proofs[name], wirevals, name) << endl;
+            if (!qapver(qapvks[vkfile], proofs[name], wirevals, name)) return 10;
         } else if (tok=="[external]") {
             string fun; sched >> fun;
             string type = qap2type[fun];
@@ -111,9 +111,9 @@ int main (int argc, char **argv) {
             cerr << "Reading input block file " << blkfile << endl;
             datablock din = readfromfile<datablock>(blkfile);
 
-            cerr << "Verifying input block " << fun << " " << blk << " ";
-            cerr << qapblockvalid(mkey, din) << " ";
-            cout << qapblockver(mkey, din, qapvks[type].blocks[blk], proofs[fun].blocks[blk]) << endl;
+            cerr << "Verifying input block " << fun << " " << blk << endl;
+            if (!qapblockvalid(mkey, din)) return 11;
+            if (!qapblockver(mkey, din, qapvks[type].blocks[blk], proofs[fun].blocks[blk])) return 12;
         } else if (tok=="[glue]") {
             string fun1; sched >> fun1;
             string type1 = qap2type[fun1];
@@ -124,12 +124,13 @@ int main (int argc, char **argv) {
 
             datablock blk; prooff >> blk;
 
-            cerr << "Verifying glue " << fun1 << "." << blk1 << "<->" << fun2 << "." << blk2 << " ";
-            cerr << qapblockvalid(mkey, blk) << " ";
-            cerr << qapblockver(mkey, blk, qapvks[type1].blocks[blk1], proofs[fun1].blocks[blk1]) << " ";
-            cerr << qapblockver(mkey, blk, qapvks[type2].blocks[blk2], proofs[fun2].blocks[blk2]) << endl;
+            cerr << "Verifying glue " << fun1 << "." << blk1 << "<->" << fun2 << "." << blk2 << endl;
+            if (!qapblockvalid(mkey, blk)) return 2;
+            if (!qapblockver(mkey, blk, qapvks[type1].blocks[blk1], proofs[fun1].blocks[blk1])) return 13;
+            if (!qapblockver(mkey, blk, qapvks[type2].blocks[blk2], proofs[fun2].blocks[blk2])) return 14;
         } else {
             cerr << "*** Unrecognized token: " << tok << endl;
+            return 15;
         }
     }
 

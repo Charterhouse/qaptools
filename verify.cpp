@@ -48,7 +48,10 @@ bool qapblockvalid(const masterkey& mk, const datablock& db) {
     // alpha check
     opt_atePairing(e1, mk.g_al, db.comm);
     opt_atePairing(e2, db.commal, g1);
-    if (e1!=e2) { cerr << "*** c-alpha pairing check failed" << endl;  }
+    if (e1!=e2) {
+        cerr << "*** c-alpha pairing check failed" << endl;
+        return false;
+    }
 
     return true;
 }
@@ -64,12 +67,18 @@ bool qapblockver(const masterkey& mk, const datablock& db, const blockvk& bvk, c
     // alpha' check
     opt_atePairing(e1, bvk.g2al, block.comm);
     opt_atePairing(e2, block.commal, g1);
-    if (e1!=e2) { cerr << "*** c'-alpha pairing check failed" << endl;  }
+    if (e1!=e2) {
+        cerr << "*** c'-alpha pairing check failed" << endl;
+        return false;
+    }
 
     // z check
     opt_atePairing(e1, bvk.g2beta, db.comm + block.comm);
     opt_atePairing(e2, g2, block.commz);
-    if (e1!=e2) { cerr << "*** block z pairing check failed" << endl;  }
+    if (e1!=e2) {
+        return false;
+        cerr << "*** block z pairing check failed" << endl;
+    }
 
     return true;
 }
@@ -89,15 +98,24 @@ bool qapver(const qapvk& qvk, const qapproof& proof, const wirevalt& pubwires, s
     // alpha checks
     opt_atePairing(e1, proof.p_ravx, g1);
     opt_atePairing(e2, qvk.g2alv, proof.p_rvx);
-    if (e1!=e2) { cerr << "*** p_ravx pairing check failed" << endl;  }
+    if (e1!=e2) {
+        cerr << "*** p_ravx pairing check failed" << endl;
+        return false;
+    }
 
     opt_atePairing(e1, g2, proof.p_rawx);
     opt_atePairing(e2, proof.p_rwx, qvk.g1alw);
-    if (e1!=e2) { cerr << "*** p_rawx pairing check failed" << endl;  }
+    if (e1!=e2) {
+        cerr << "*** p_rawx pairing check failed" << endl;
+        return false;
+    }
 
     opt_atePairing(e1, proof.p_rayx, g1);
     opt_atePairing(e2, qvk.g2aly, proof.p_ryx);
-    if (e1!=e2) { cerr << "*** p_rayx pairing check failed" << endl;  }
+    if (e1!=e2) {
+        cerr << "*** p_rayx pairing check failed" << endl;
+        return false;
+    }
 
     // s check
     Ec1 versum = proof.p_rvx+proof.p_ryx;
@@ -105,7 +123,10 @@ bool qapver(const qapvk& qvk, const qapproof& proof, const wirevalt& pubwires, s
     opt_atePairing(e1, g2, proof.p_z);
     opt_atePairing(e2, qvk.g2bet, versum);
     opt_atePairing(e3, proof.p_rwx, qvk.g1bet);
-    if (e1!=(e2*e3)) { cerr << "*** beta check failed" << endl;  }
+    if (e1!=(e2*e3)) {
+        cerr << "*** beta check failed" << endl;
+        return false;
+    }
 
     Ec1 pub_rvx = g10;
     Ec2 pub_rwx = g20;
@@ -122,7 +143,10 @@ bool qapver(const qapvk& qvk, const qapproof& proof, const wirevalt& pubwires, s
     opt_atePairing(e1, pub_rwx + proof.p_rwx, pub_rvx + proof.p_rvx);
     opt_atePairing(e2, qvk.g2ryt, proof.p_h);
     opt_atePairing(e3, g2, pub_ryx + proof.p_ryx);
-    if (e1!=(e2*e3)) { cerr << "*** divisibility check failed" << endl;  }
+    if (e1!=(e2*e3)) {
+        cerr << "*** divisibility check failed" << endl;
+        return false;
+    }
 
     return true;
 }
