@@ -1,4 +1,7 @@
-
+*.o
+*.exe
 build/*
 .DS_Store
 binary/* 
+mingw64/*
+qaptools-*.zip
