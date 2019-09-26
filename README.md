@@ -15,4 +15,4 @@ cmake ..
 make
 ```
 
-Windows binaries are available [here](https://github.com/Charterhouse/qaptools/releases/download/0.1/qaptools-0.1-win32.zip)
+Windows binaries are available [here](https://github.com/Charterhouse/qaptools/releases/download/0.1.1/qaptools-win64-0.1.1.zip)
