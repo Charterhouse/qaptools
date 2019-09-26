@@ -15,4 +15,6 @@ cmake ..
 make
 ```
 
+Compiling for Windows: using mingw64 (on Windows or as a cross-compiler) and [the GMP package](https://packages.msys2.org/package/mingw-w64-x86_64-gmp?repo=mingw64)
+
 Windows binaries are available [here](https://github.com/Charterhouse/qaptools/releases/download/0.1/qaptools-0.1-win32.zip)
