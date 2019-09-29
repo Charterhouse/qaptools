@@ -3,7 +3,7 @@ GMPDIR=/users/meilof/Subversion/qaptools/mingw64
 
 # cflags/ldflags for tools
 CFLAGS=-std=c++11 -DBN_SUPPORT_SNARK=1 -Idepends/xbyak -Idepends/ate-pairing/include -I$(GMPDIR)/include
-LDFLAGS=-Late-pairing/lib -L$(GMPDIR)/lib -lm -lgmpxx -lgmp
+LDFLAGS=-Late-pairing/lib -L$(GMPDIR)/lib -lm -lgmpxx -lgmp -static-libgcc -static-libstdc++ -static
 
 EXECS=qapgen qapcoeffcache qapgenf qapinput qapprove qapver
 
