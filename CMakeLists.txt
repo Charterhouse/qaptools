@@ -43,3 +43,5 @@ add_executable(qapgenf qapgenf.cpp)
 add_executable(qapinput qapinput.cpp)
 add_executable(qapprove qapprove.cpp)
 add_executable(qapver qapver.cpp)
+
+install (TARGETS qapgen qapcoeffcache qapgenf qapinput qapprove qapver DESTINATION bin)
